@@ -24,7 +24,9 @@ while True:
 		pass
     except KeyboardInterrupt:
 		#quits with keyboard interrupt
+		session.close()
 		quit()
+		# quit() seems to stop error when using control c
     except StopIteration:
 		session.close()
 		print "GPSD has terminated"
