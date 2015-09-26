@@ -1,9 +1,10 @@
 import gps
- 
+# from https://learn.adafruit.com/adafruit-ultimate-gps-on-the-raspberry-pi/using-your-gps
+
 # Listen on port 2947 (gpsd) of localhost
 session = gps.gps("localhost", "2947")
 session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
- 
+
 while True:
     try:
     	report = session.next()
