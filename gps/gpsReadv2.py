@@ -10,15 +10,21 @@ while True:
 		# To see all report data, uncomment the line below
 		# print report
 	print report['class']
+	#prints the class value in the dictionary
+
 	print report
+	#prints the dictionary report
 
 	if report['class'] == 'TPV':
 		print report['lon']
+		#read the lon value in the report dictionary
 		#report.lon can be used too
     except KeyError:
+		#catch errors
 		pass
     except KeyboardInterrupt:
+		#quits with keyboard interrupt
 		quit()
     except StopIteration:
-		session = None
+		session.close()
 		print "GPSD has terminated"
