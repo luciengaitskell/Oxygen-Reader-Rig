@@ -8,27 +8,34 @@ class gpsPosition(threading.Thread):
 		self.session = gps.gps("localhost", "2947")
 		self.session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 		self.stop=False
-		self.lon="init"
-		self.lat="inti"
+		self.defaultValue="waiting for a value..."
+		self.lon=self.defaultValue
+		self.lat=self.defaultValue
 		self.elapsed_time=0
 		self.checked=False
 		self.report="not set yet"
+		self.distanceGot="hasn't been used yet"
 
 
 	def check(self):
 		self.report = self.session.next()
+		presetDist="no where"
 
 		if self.report['class'] == 'TPV':
-			if hasattr(self.report,self.lon):
+			presetDist="class check"
+			if hasattr(self.report,"lon"):
+				presetDist="got to lon"
 				self.lon = self.report['lon']
-			if hasattr(self.report,self.lat):
+			if hasattr(self.report,"lat"):
 				self.lat = self.report['lat']
+		self.distanceGot=presetDist
 
 	def run(self):
-		startTime=time.time()
+		"""startTime=time.time()
 		self.elapsed_time = 0
 		while self.elapsed_time < 5:
-			self.elapsed_time = time.time() - startTime
+			self.elapsed_time = time.time() - startTime"""
+		#NOT NEEDED: as the below functions wait for the lon/lat being set 
 
 		while not self.stop:
 			self.check()
@@ -36,15 +43,18 @@ class gpsPosition(threading.Thread):
 		print("finished")
 
 	def getLatLon(self):
-		while not self.lon == "" and not self.lat == "":
+		while not self.isReadReady():
 			pass
-		return [self.lon,self.lan]
+		return [self.lat,self.lon]
 	def getLon(self):
-		return (self.getLatLon())[0]
-	def getLat(self):
 		return (self.getLatLon())[1]
-	def getElTime(self):
-		return self.elapsed_time
+	def getLat(self):
+		return (self.getLatLon())[0]
+	def isReadReady(self):
+		if self.lon == self.defaultValue or self.lat == self.defaultValue:
+			return False
+		else:
+			return True
 	def close(self):
 		self.stop=True
 		quit()
