@@ -2,7 +2,7 @@ import gpsPosition
 
 thread=gpsPosition.gpsPosition("localhost",2947)
 
-thread.start()
+#thread.start()
 print "started"
 
 print "\n\nLon:"

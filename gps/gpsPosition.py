@@ -15,6 +15,7 @@ class gpsPosition(threading.Thread):
 		self.checked=False
 		self.report="not set yet"
 		self.distanceGot="hasn't been used yet"
+		threading.Thread.start(self)
 
 
 	def check(self):
