@@ -4,16 +4,6 @@ session = gps.gps("localhost", "2947")
 session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 
 while True:
-	print "not yet"
-	session.next()
-'''	try:
-		session.next()
-		print "not at end"
-	except StopIteration:
-		print "end"
-		break'''
-
-while True:
     try:
     	report = session.next()
 		# Wait for a 'TPV' report and display the current time
