@@ -1,27 +1,25 @@
 import gpsRead
 
+debug = False
 thread=gpsRead.gpsRead("localhost",2947)
-
-#thread.start()
 print "started"
 
 print "\n\nLon:"
 print thread.getLon()
 print "\nLat:"
 print thread.getLat()
-print "\nLat,Lon:"
+print "\[nLat,Lon]:"
 print thread.getLatLon()
 
-"""while True:
-#	print thread.distanceGot
-#	print thread.report
-#	print thread.elapsed_time
-	print "\nLon:"
+if debug:
+	while True:
+	print "\n The GPS Report Dictionary:"
+	print thread.report
+	print "\nLon Var:"
 	print thread.lon
-	print "\nLat:"
+	print "\nLat Var:"
 	print thread.lat
-#	print thread.checked
-"""
+
 thread.close()
 print "finished"
 thread.exit()
