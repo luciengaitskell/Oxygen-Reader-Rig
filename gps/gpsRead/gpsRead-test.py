@@ -1,6 +1,6 @@
-import gpsPosition
+import gpsRead
 
-thread=gpsPosition.gpsPosition("localhost",2947)
+thread=gpsRead.gpsRead("localhost",2947)
 
 #thread.start()
 print "started"
