@@ -5,7 +5,7 @@ import time
 class gpsRead(threading.Thread):
 	def __init__(self, host, port):
 		super(gpsRead, self).__init__()
-		self.session = gps.gps("localhost", "2947")
+		self.session = gps.gps(host, port)
 		self.session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 		self.stop=False
 		self.defaultValue="waiting for a value..."
