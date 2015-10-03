@@ -2,7 +2,7 @@ import gps
 import threading
 import time
 
-class gpsPosition(threading.Thread):
+class gpsRead(threading.Thread):
 	def __init__(self, host, port):
 		super(gpsPosition, self).__init__()
 		self.session = gps.gps("localhost", "2947")
