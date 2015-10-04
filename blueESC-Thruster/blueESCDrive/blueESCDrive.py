@@ -3,7 +3,7 @@ import time
 
 DEFAULT={'busNumb':1, 'address':0x29}
 ADDRESSES={'throttle':0x00}
-TEST_TIME=0.25
+TEST_TIME=1
 #Time in seconds to test pulse for moving test
 class blueESCDrive:
     def __init__(self, address=DEFAULT['address'], busNumb=DEFAULT['busNumb']):
