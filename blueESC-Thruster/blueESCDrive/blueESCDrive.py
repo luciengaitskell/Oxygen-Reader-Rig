@@ -13,7 +13,7 @@ class blueESCDrive:
     def isMoving(self):
         self.IOWord(0x02)
         startTime=time.time()
-        while time.time()<TEST_TIME:
+        while (time.time()-startTime)<TEST_TIME:
             pass
         if self.IOWord(0x02)>0:
             return True
