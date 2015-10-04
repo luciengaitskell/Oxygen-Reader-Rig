@@ -7,12 +7,22 @@ class blueESCDrive:
     def __init__(self, address=DEFAULT['address'], busNumb=DEFAULT['busNumb']):
         self.BUS = smbus.SMBus(busNumb)
         self.ADDRESS=address
-
+        
+    def IOByte(self, address, inputValue=None):
+        IO(False, address, inputValue)
     def IOWord(self, address, inputValue=None):
+        IO(True, address, inputValue)
+    def IO(self, word, address, inputValue=None):
         if inputValue==None:
-            return self.BUS.read_byte_data(self.ADDRESS, address)
+            if word:
+                return self.BUS.read_word_data(self.ADDRESS, address)
+            else:
+                return self.BUS.read_byte_data(self.ADDRESS, address)
         else:
-            self.BUS.write_word_data(self.ADDRESS, address, inputValue)
+            if word:
+                self.BUS.write_word_data(self.ADDRESS, address, inputValue)
+            else:
+                self.BUS.write_byte_data(self.ADDRESS, address, inputValue)
 
     def power(self, inputPower=None):
         if inputPower==None:
