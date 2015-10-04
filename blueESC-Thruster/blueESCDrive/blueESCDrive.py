@@ -44,7 +44,7 @@ class blueESCDrive:
             raise TypeError("inputPower requires 'int' not '" + type(inputPower).__name__ + "'")
         """if self.inputPower() == 0:
             self.IOWord(ADDRESSES['throttle'], 0)"""
-        if not isMoving():
+        if not self.isMoving():
             self.IOWord(ADDRESSES['throttle'], 0)
             #initialize motor if stopped moving
         self.IOWord(ADDRESSES['throttle'], inputPower)
