@@ -11,11 +11,11 @@ class blueESCDrive:
         self.ADDRESS=address
 
     def isMoving(self):
-        IOWord(0x02)
+        self.IOWord(0x02)
         startTime=time.time()
         while time.time()<TEST_TIME:
             pass
-        if IOWord(0x02)>0:
+        if self.IOWord(0x02)>0:
             return True
         return False
 
