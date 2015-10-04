@@ -9,9 +9,13 @@ class blueESCDrive:
         self.ADDRESS=address
 
     def IOByte(self, address, inputValue=None):
-        self.IO(False, address, inputValue)
+        returnVal = self.IO(False, address, inputValue)
+        if not returnVal == None:
+            return returnVal
     def IOWord(self, address, inputValue=None):
-        self.IO(True, address, inputValue)
+        returnVal = self.IO(True, address, inputValue)
+        if not returnVal == None:
+            return returnVal
     def IO(self, word, address, inputValue=None):
         if inputValue==None:
             if word:
