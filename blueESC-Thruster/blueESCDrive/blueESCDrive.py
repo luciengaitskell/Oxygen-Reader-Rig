@@ -3,8 +3,8 @@ import time
 
 DEFAULT={'busNumb':1, 'address':0x29}
 ADDRESSES={'throttle':0x00}
-TEST_TIME=1
-#Time in seconds to test pulse for moving test
+TEST_TIME=0.02
+#Time in seconds to test pulse for moving test (0.02 min - could be unstable though)
 class blueESCDrive:
     def __init__(self, address=DEFAULT['address'], busNumb=DEFAULT['busNumb']):
         self.BUS = smbus.SMBus(busNumb)
@@ -16,6 +16,8 @@ class blueESCDrive:
         while (time.time()-startTime)<TEST_TIME:
             pass
         if self.IOWord(0x02)>0:
+            #raise Exception('here')
+            #UNCOMMENT for a pointer when it doesn't have to initialize
             return True
         return False
 
