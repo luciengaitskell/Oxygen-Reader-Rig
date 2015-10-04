@@ -28,13 +28,10 @@ class blueESCDrive:
             else:
                 self.BUS.write_byte_data(self.ADDRESS, address, inputValue)
 
-    def power(self, inputPower=None):
-        if inputPower==None:
-            return self.IOWord(ADDRESSES['throttle'])
-        else:
-            if not type(inputPower) is int:
-                raise TypeError("inputPower requires 'int' not '" + type(inputPower).__name__ + "'")
-            """if self.inputPower() == 0:
-                self.IOWord(ADDRESSES['throttle'], 0)"""
-            self.IOWord(ADDRESSES['throttle'], 0)
-            self.IOWord(ADDRESSES['throttle'], inputPower)
+    def power(self, inputPower):
+        if not type(inputPower) is int:
+            raise TypeError("inputPower requires 'int' not '" + type(inputPower).__name__ + "'")
+        """if self.inputPower() == 0:
+            self.IOWord(ADDRESSES['throttle'], 0)"""
+        self.IOWord(ADDRESSES['throttle'], 0)
+        self.IOWord(ADDRESSES['throttle'], inputPower)
