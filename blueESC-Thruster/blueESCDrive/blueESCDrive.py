@@ -1,12 +1,23 @@
 import smbus
-import threading
+import time
+
 DEFAULT={'busNumb':1, 'address':0x29}
 ADDRESSES={'throttle':0x00}
-
+TEST_TIME=0.25
+#Time in seconds to test pulse for moving test
 class blueESCDrive:
     def __init__(self, address=DEFAULT['address'], busNumb=DEFAULT['busNumb']):
         self.BUS = smbus.SMBus(busNumb)
         self.ADDRESS=address
+
+    def isMoving(self):
+        IOWord(0x02)
+        startTime=time.time()
+        while time.time()<TEST_TIME:
+            pass
+        if IOWord(0x02)>0:
+            return True
+        return False
 
     def IOByte(self, address, inputValue=None):
         returnVal = self.IO(False, address, inputValue)
@@ -33,5 +44,7 @@ class blueESCDrive:
             raise TypeError("inputPower requires 'int' not '" + type(inputPower).__name__ + "'")
         """if self.inputPower() == 0:
             self.IOWord(ADDRESSES['throttle'], 0)"""
-        self.IOWord(ADDRESSES['throttle'], 0)
+        if not isMoving():
+            self.IOWord(ADDRESSES['throttle'], 0)
+            #initialize motor if stopped moving
         self.IOWord(ADDRESSES['throttle'], inputPower)
